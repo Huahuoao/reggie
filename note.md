@@ -1,6 +1,6 @@
 # 瑞吉外卖(后端)
 
-### 开发环境搭建1
+### 开发环境搭建
 
 ##### 数据库环境搭建
 
@@ -16,7 +16,7 @@
 - orders 订单表
 - order_detail 订单明细表
 
-<img src="I:\瑞吉外卖\images\数据库结构.png" alt="数据库结构" style="zoom:;" />
+![image](https://github.com/Huahuoao/reggie/blob/master/images/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%93%E6%9E%84.png)
 
 ##### Maven项目搭建
 
@@ -254,8 +254,6 @@ public R<Employee> login(HttpServletRequest request,@RequestBody Employee employ
 }
 ```
 
-![登录界面](I:\瑞吉外卖\images\登录界面.png)
-
 ##### 用户退出功能
 
 ```java
@@ -349,8 +347,6 @@ public R<String> save(HttpServletRequest request,@RequestBody Employee employee)
 }
 ```
 
-![新增员工](I:\瑞吉外卖\images\新增员工.png)
-
 ##### 分页查询
 
 ```java
@@ -375,8 +371,6 @@ public R<Page> page(int page,int pageSize,String name)
 }
 ```
 
-![分页查询](I:\瑞吉外卖\images\分页查询.png)
-
 ##### 修改员工信息
 
 ```java
@@ -395,8 +389,6 @@ public R<String> update(HttpServletRequest request,@RequestBody Employee employe
     return R.success("员工信息修改成功");
 }
 ```
-
-![修改员工信息](I:\瑞吉外卖\images\修改员工信息.png)
 
 > 因为id为long类型，在前端处理的时候转换为json数据会进行精度损失，所以要设计一个对象映射器，基于jackson将Java对象转化为json，这样就避免了精度损失，导致无法匹配。工具类直接用就行了。导入工具类 再在SpringMvcConfig里面配置这个映射器为优先，即可启用。
 
