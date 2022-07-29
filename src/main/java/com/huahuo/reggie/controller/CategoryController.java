@@ -3,11 +3,8 @@ package com.huahuo.reggie.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.huahuo.reggie.common.CustomException;
 import com.huahuo.reggie.common.R;
 import com.huahuo.reggie.entity.Category;
-import com.huahuo.reggie.entity.Dish;
-import com.huahuo.reggie.entity.Setmeal;
 import com.huahuo.reggie.service.CategoryService;
 import com.huahuo.reggie.service.DishService;
 import com.huahuo.reggie.service.SetMealService;
@@ -97,4 +94,6 @@ public class CategoryController {
         List<Category> list = categoryService.list(queryWrapper);
         return R.success(list);
     }
+
+
 }
