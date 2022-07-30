@@ -156,7 +156,26 @@ public R<DishDto> get(@PathVariable Long id)
         return R.success(dishDtoList);
     }
 
-
+@PostMapping("/status/0")
+    public R<String> stop(@RequestParam List<Long> ids)
+{
+    for (Long id : ids) {
+        Dish dish = dishService.getById(id);
+        dish.setStatus(0);
+        dishService.updateById(dish);
+    }
+    return  R.success("操作成功");
+}
+    @PostMapping("/status/1")
+    public R<String> on(@RequestParam List<Long> ids)
+    {
+        for (Long id : ids) {
+            Dish dish = dishService.getById(id);
+            dish.setStatus(1);
+            dishService.updateById(dish);
+        }
+        return  R.success("操作成功");
+    }
 
 
 }
