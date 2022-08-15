@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--名称空间-->
+<mapper namespace="com.itheima.mapper.AnimalMapper"> <!--这个是mapper接口的位置-->
+<!--    这个是实体类pojo的位置     -->
+    <select id="selectAll" resultType="com.itheima.pojo.Animal">
+        select * from tb_animal;
+    </select>
+</mapper>

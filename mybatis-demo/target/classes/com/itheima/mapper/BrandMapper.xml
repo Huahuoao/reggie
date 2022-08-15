@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--名称空间-->  <!--Statement-->
+<mapper namespace="com.itheima.mapper.BrandMapper">
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into  tb_brand(brand_name,company_name,ordered,description,status)
+
+        values (#{brand_name},#{company_name},#{ordered},#{description},#{status});
+    </insert>
+
+    <update id="update">
+        update tb_brand
+        <set>
+            <if test="brand_name != null and brand_name != ''">
+                brand_name = #{brand_name},
+            </if>
+            <if test="company_name != null and company_name != ''">
+                company_name = #{company_name},
+            </if>
+            <if test="ordered != null">
+                ordered = #{ordered},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="status != null">
+                status = #{status}
+            </if>
+        </set>
+        where id = #{id};
+    </update>
+
+
+    <delete id="deleteById">
+        delete from tb_brand where id = #{id};
+
+    </delete>
+    <delete id="deleteByIds">
+        delete from tb_brand where id
+in
+    <foreach collection="array" item="id" separator="," open="(" close=")">
+     #{id}
+    </foreach>
+
+    </delete>
+
+
+    <!--转义字符  <= &lt;-->
+    <select id="SelectAll" resultType="com.itheima.pojo.Brand">
+        Select * from tb_brand;
+    </select>
+    <select id="SelectById" resultType="com.itheima.pojo.Brand">
+        SELECT * from tb_brand where id = #{id};  <!--防止sql注入 用$的话会有sql注入-->
+    </select>
+    <!--动态sql-->
+    <!--if -->
+    <!--条件查询-->
+<!--    <select id="selectByCondition" resultType="com.itheima.pojo.Brand">-->
+<!--        SELECT * from tb_brand-->
+<!--        where status = #{status}-->
+<!--        and company_name like #{company_name}-->
+<!--       and brand_name like #{brand_name}-->
+<!--    </select>-->
+
+    <select id="selectByCondition" resultType="Brand">
+        select *
+        from tb_brand
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="company_name != null and company_name != '' ">
+                and company_name like #{company_name}
+            </if>
+            <if test="brand_name != null and brand_name != '' ">
+                and brand_name like #{brand_name}
+            </if>
+        </where>
+
+    </select>
+    <select id="selectByConditionSingle" resultType="com.itheima.pojo.Brand">
+  select * 
+from tb_brand
+<where>
+<choose>  <!--相当于switch-->
+    <when test="status != null">
+        status = #{status}
+    </when> <!--相当于case-->
+    <when test="company_name != null and company_name != ''">
+        company_name like #{company_name}
+    </when> <!--相当于case-->
+    <when test="brand_name != null and brand_name != '' ">
+        brand_name like #{brand_name}
+    </when> <!--相当于case-->
+
+</choose>
+</where>
+
+
+
+    </select>
+</mapper>
